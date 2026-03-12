@@ -1,6 +1,7 @@
 package com.example.unittestexample.domain
 
 import com.example.unittestexample.data.CalcRepositoryImpl
+import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -19,6 +20,7 @@ class AddUseCaseTest {
     private val calcRepository = CalcRepositoryImpl()
     @Before
     fun setUp() {
+        println("=======")
         addUseCase = AddUseCase(calcRepository)
     }
 
@@ -29,7 +31,12 @@ class AddUseCaseTest {
 
     @Test
     fun `Test with a = Integer Max and b = 1` () {
-        assertNotEquals(Int.MAX_VALUE+ 1, addUseCase(a = Int.MAX_VALUE, b = 1))
+        assertEquals(Int.MAX_VALUE + 1, addUseCase(a = Int.MAX_VALUE, b = 1))
+    }
+
+    @Test
+    fun `Test when a = 50 and b = -50`() {
+        assertThat(addUseCase(50,-50)).isEqualTo(5)
     }
 
     @After
